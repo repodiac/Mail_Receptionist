@@ -1,0 +1,4 @@
+Hinweise zur Installation
+-------------------------
+
+* Eine Anleitung und Hilfe zur Installation finden Sie u.a. in der Datei README.md (in diesem Verzeichnis)

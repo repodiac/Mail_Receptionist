@@ -1,0 +1,38 @@
+[Machine Learning]
+model for textcat = universal-sentence-encoder-multilingual_3
+model for textcat_tooltip = Das verwendete Machine Learning-Modell, im Allgemeinen nicht ändern
+threshold = 55
+threshold_tooltip = Der Schwellwertw (0-100), der entscheidet, ob eine eMail als Anfrage zu COVID19-Impfungen kategorisiert wird (größer) oder nicht (kleiner)
+use built-in model = True
+use built-in model_tooltip = Zum Start ohne eigene Beispiele bzw. als zusätzliche Unterstützung für die KI können Sie eine kleine Auswahl an (fiktiven) positiven und negativen Beispielen nutzen
+
+[Mail]
+imap server = 
+imap server_tooltip = Der Mail-Server, bei dem Sie Ihre Mail abholen. Es ist erforderlich, dass dieser IMAP unterstützt.
+imap port = 993
+imap port_tooltip = Der Port des IMAP Mail-Servers, der TLS unterstützt.
+smtp server = 
+smtp server_tooltip = Der Mail-Server, der zum Versenden der Auto-Response auf Anfragen verwendet wird. Er sollte TLS unterstützen.
+smtp port = 465
+smtp port_tooltip = Der Port des SMTP Mail-Servers, der TLS unterstützt.
+login mail address = 
+login mail address_tooltip = Ihre eMail-Adresse (in den meisten Fällen gleich dem Login/Nutzer)
+ssl protocol = 5
+ssl protocol_tooltip = Die intern codierte Version für die zu verwendende TLS-Version, im Allgemeinen nicht ändern
+check mail every .. minutes = 5
+check mail every .. minutes_tooltip = Definiert das Intervall in Minuten, wie oft die eMails analysiert und kategorisiert werden sollen
+default mail folder = INBOX
+default mail folder_tooltip = Ist standardmäßig auf die Inbox/Eingang des Mail-Postfachs eingestellt; von hier werden die eMails ausgelesen für die Analyse. Sollen die Mails in einem anderen Ordner analysiert werden (oder heißt dieser anders als <Inbox>), bite hier ändern.
+send auto-response mail = True
+send auto-response mail_tooltip = Wenn Haken gesetzt ist, wird nach der Kategorisierung als Anfrage zu COVID19-Impfungen eine automatische Antwort-Mail an den Absender versandt
+
+[Filter]
+folder for positive examples = Impfanfragen (COVID-19)/POS_Beispiele
+folder for positive examples_tooltip = Definiert den Pfad, in dem Beispiel-Mails für die Kategorisierung als Anfrage zu COVID19-Impfungen zu finden sind (positiv)
+folder for negative examples = Impfanfragen (COVID-19)/NEG_Beispiele
+folder for negative examples_tooltip = Definiert den Pfad, in dem Beispiel-Mails zu finden sind (negativ), die KEINE Anfrage zu COVID19-Impfungen sind
+filtered folder = Impfanfragen (COVID-19)
+filtered folder_tooltip = Definiert den Pfad, in den die Mails verschoben werden, die als Anfrage zu COVID19-Impfungen kategorisiert wurden
+filter tag = Impfanfrage COVID-19
+filter tag_tooltip = der Präfix oder Tag, der allen Mails im Betreff vorangestellt wird\n(analog zu [SPAM] bei Spamfiltern), die als Anfrage zu COVID19-Impfungen kategorisiert wurden
+

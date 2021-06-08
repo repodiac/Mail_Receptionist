@@ -1,0 +1,7 @@
+beautifulsoup4==4.9.3
+imap_tools==0.41.0
+keras==2.4.3
+numpy==1.20.3
+PySimpleGUI==4.43.0
+tensorflow==2.5.0
+tensorflow_text==2.5.0

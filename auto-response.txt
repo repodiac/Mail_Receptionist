@@ -1,0 +1,17 @@
+Guten Tag,
+
+danke für Ihre Anfrage zu einer COVID19-Impfung.
+
+Aufgrund des sehr hohen Anfrage-Volumens sehen wir uns zurzeit außer Stande, Ihnen zeitnah einen Termin anzubieten.
+Bitte wenden Sie sich zu einem späteren Zeitpunkt nochmal an uns oder probieren Sie eine der anderen Optionen wie bspw. Impfzentren für eine Terminvergabe.
+
+Viele Grüße und bleiben Sie gesund!
+Ihr Praxis-Team <<<<Praxis-Name hier>>>>
+
+Hinweis: Sollte Ihre Mail fälschlicherweise als Anfrage für eine COVID19-Impfung erkannt worden sein, bitten wir dies zu entschuldigen.
+Formulieren Sie diese stattdessen um oder wenden Sie sich per Telefon direkt an uns. Danke für Ihr Verständnis.
+
+---
+Dies ist eine automatisch generierte Antwort und Analyse von *Mail Receptionist (COVID-19 Ausgabe)*
+(www.github.com/repodiac/Mail_Receptionist)
+
