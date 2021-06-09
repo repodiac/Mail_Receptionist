@@ -19,6 +19,7 @@ Mail_Receptionist, Copyright 2021 by repodiac, see https://github.com/repodiac f
 
 ## Versionsgeschichte
 
+* `0.1.2` - Windows Release mit all-in-one Executable, [hier ZIP runterladen](https://github.com/repodiac/Mail_Receptionist/releases/tag/0.1.2)
 * `soft release 0.1.1` - GUI bugfix, erste Hinweise für das Setup unter Windows
 * `soft release 0.1` - erstes Soft-Release, Dokumentation und Windows-Installation etc. fehlen noch
 
