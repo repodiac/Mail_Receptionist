@@ -126,9 +126,11 @@ def _check_settings(settings: list) -> None:
         if kv[0] in ('check mail every .. minutes', 'imap port', 'smtp port'):
             try:
                 int(kv[1])
+                if kv[0] == 'check mail every .. minutes' and int(kv[1]) < 1:
+                    raise Exception()
             except Exception:
-                _LOGGER.error('Setting <'+kv[0]+'> is not an integer or is empty.')
-                error_list.append('- ' + kv[0] + ' ist keine Ganzzahl oder ist leer.')
+                _LOGGER.error('Setting <'+kv[0]+'> is not a valid integer or is empty.')
+                error_list.append('- ' + kv[0] + ' ist keine gültige Ganzzahl oder ist leer.')
         elif kv[0] in ('filtered folder', 'filter tag'):
             if not filtered_is_set and kv[1] and isinstance(kv[1], str):
                 filtered_is_set = kv[0]
@@ -158,6 +160,27 @@ def _reset_elements(main_window: sg.Window, org_button_color: tuple) -> None:
     main_window['-SAVE_SETTINGS-'].update(disabled=False)
     # reset label and text color
     main_window['-STATUS_MSG-'].update(value='nicht aktiviert', text_color='black')
+
+
+def _update_count_down(previous_count_down_minutes, check_mail_interval, current_time, start_time, main_window) -> int:
+    """
+    Utility method, update status message text ("count down") until next mail check begins
+    :param previous_count_down_minutes: current state of counter
+    :param check_mail_interval: given mail check interval from config
+    :param current_time: current timestamp ("now")
+    :param start_time: timestamp starting point of the current interval
+    :param main_window: the main window (PySimpleGUI element)
+    :return: current countdown counter in minutes (int)
+    """
+
+    # count down minutes until analysis is launched
+    count_down_minutes = check_mail_interval - int((current_time - start_time) / 60)
+    if previous_count_down_minutes >= (count_down_minutes + 1):
+        main_window['-STATUS_MSG-'].update('AKTIV - nächste Analyse in ' + str(count_down_minutes) + ' Minuten',
+                                           text_color='red')
+
+    return count_down_minutes
+
 
 def launch_gui() -> None:
     """
@@ -266,11 +289,9 @@ def launch_gui() -> None:
             # time current point in time
             current_time = int(round(time.time()))
 
-            # count down minutes until analysis is launched
-            prev_cdm = count_down_minutes
-            count_down_minutes = check_mail_interval - int((current_time-start_time)/60)
-            if prev_cdm >= (count_down_minutes+1):
-                main_window['-STATUS_MSG-'].update('AKTIV - nächste Analyse in ' + str(count_down_minutes) + ' Minuten', text_color='red')
+            # update counter until next mail check begins (in case)
+            count_down_minutes = _update_count_down(count_down_minutes, check_mail_interval,
+                                                    current_time, start_time,main_window)
 
             # time and compare with settings (in the event loop),
             # if time passed by (measured in seconds) equals or is greater than
@@ -297,7 +318,12 @@ def launch_gui() -> None:
                     # filter these mails wrt. inquiries (move them to the specified folder and/or add a filter tag to the subject)
                     utils.filter_mails(filtered_mails, account, passwd)
                     # after the analysis enable the button again
-                    main_window['-LAUNCH_AND_STOP-'].update(disabled=False, button_color=org_button_color)
+                    main_window['-LAUNCH_AND_STOP-'].update(disabled=False)
+                    # update counter until next mail check begins (in case)
+                    main_window['-STATUS_MSG-'].update(
+                        'AKTIV - nächste Analyse in ' + str(check_mail_interval) + ' Minuten',
+                        text_color='red')
+
                 except InvalidSettingsError or MailServerError as ie:
                     # error pop-up for possible errors occurring in the meantime
                     sg.popup_error("\n".join(ie.get_error_list()), font='Any 10', title='Fehler')

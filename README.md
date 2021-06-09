@@ -17,23 +17,49 @@ Mail_Receptionist, Copyright 2021 by repodiac, see https://github.com/repodiac f
 
 ## Versionsgeschichte
 
+* `soft release 0.1.1` - GUI bugfix, erste Hinweise für das Setup unter Windows
 * `soft release 0.1` - erstes Soft-Release, Dokumentation und Windows-Installation etc. fehlen noch
 
 # Installation/Setup
 
-* Abhängigkeiten:
+## Windows Installer (EXE)
+
+ToDo
+
+## Reine Python-Installation und Start
+
+### Abhängigkeiten (Linux/Windows):
 
 ```
-* Python 3.6
+* Python 3.6.x (getestet mit Version 3.6.12 unter Linux und 3.6.8 unter Windows 7)
+* Für den Download ggf. GIT oder Git for Windows
 * pip install -r requirements.txt
 ```
+**Wichtiger Hinweis für Windows**
 
-* Für Erste: Reine Python-Installation und Start (nach Installation der Abhängigkeiten) über
+Ggf. gibt es beim Start einen Fehler mit u.a. dem Hinweis: `Failed to load the native Tensorflow runtime.`
 
+Hier hilft es wenn die **neueste** Version der *[Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019](https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0)*
+heruntergeladen und installiert wird.
+
+## In 3 Schritten zu Installation und Start (Linux/Windows)
+
+1. Download und Bibliotheken installieren
 ```
-git clone https://github.com/repodiac/Mail_Receptionist.git
+git clone https://github.com/repodiac/Mail_Receptionist.git 
 cd Mail_Receptionist
-* Download von Universal Sentence Encoder: https://tfhub.dev/google/universal-sentence-encoder-multilingual/3?tf-hub-format=compressed
-* Dann entpacken und Verzeichnis in das Projektverzeichnis verschieben, also nach Mail_Receptionist/universal-sentence-encoder-multilingual_3
+pip install -r requirements.txt
+```
+**Hinweis für Windows**:
+Bei Git for Windows gibt es ggf. keine Unterstützung für HTTPS, dann bitte mit HTTP probieren: 
+`git clone http://github.com/repodiac/Mail_Receptionist.git `
+
+2. Universal Sentence Encoder downloaden und entpacken
+
+* Download von [Universal Sentence Encoder, Version 3](https://tfhub.dev/google/universal-sentence-encoder-multilingual/3?tf-hub-format=compressed)
+* Dann entpacken und das Verzeichnis in das Projektverzeichnis verschieben, also nach Verzeichnis `[..]/Mail_Receptionist/universal-sentence-encoder-multilingual_3`
+
+3. Start von Mail Receptionist
+```
 python mail_receptionist.py
 ```

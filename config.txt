@@ -27,9 +27,9 @@ send auto-response mail = True
 send auto-response mail_tooltip = Wenn Haken gesetzt ist, wird nach der Kategorisierung als Anfrage zu COVID19-Impfungen eine automatische Antwort-Mail an den Absender versandt
 
 [Filter]
-folder for positive examples = Impfanfragen (COVID-19)/POS_Beispiele
+folder for positive examples = Impfanfragen (COVID-19)|POS_Beispiele
 folder for positive examples_tooltip = Definiert den Pfad, in dem Beispiel-Mails für die Kategorisierung als Anfrage zu COVID19-Impfungen zu finden sind (positiv)
-folder for negative examples = Impfanfragen (COVID-19)/NEG_Beispiele
+folder for negative examples = Impfanfragen (COVID-19)|NEG_Beispiele
 folder for negative examples_tooltip = Definiert den Pfad, in dem Beispiel-Mails zu finden sind (negativ), die KEINE Anfrage zu COVID19-Impfungen sind
 filtered folder = Impfanfragen (COVID-19)
 filtered folder_tooltip = Definiert den Pfad, in den die Mails verschoben werden, die als Anfrage zu COVID19-Impfungen kategorisiert wurden
