@@ -2,6 +2,8 @@
 
 <span style="color:red">***IMPORTANT NOTE: This project is currently available in German, only - in case, you are interested in an English or international version, let me know in the Issues section***</span>.
 
+![Main Screen](docs/images/mail_receptionist_main_screen.png)
+
 **Mail Receptionist (COVID-19 Ausgabe)** ist ein pythonbasiertes Tool mit graphischer Benutzeroberfläche (GUI), welches automatische eMail-Klassifikationen bzgl. einer COVID-19 Impfanfrage durchführt. eMails werden automatisch bei positiver Klassifikation in spezielle Ordner auf dem eMail-Server verschoben oder mit einem Tag (analog zu "[SPAM]") versehen.
 
 Die Idee dahinter ist, dass (Haus-)Ärzte mittels dieses Tools die Möglichkeit haben, eine hohe Belastung durch eMail-Anfragen wegen einer COVID-19 Impfung zu bewältigen, indem sie diese Mails automatisiert erfassen, filtern und mit einer vorgefertigten Rückantwort bearbeiten lassen können. Dies erspart manuelle Durchsicht und eMail-Beantwortung etc. und entlastet damit Arzt und Praxisteam.
