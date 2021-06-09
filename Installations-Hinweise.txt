@@ -2,3 +2,12 @@ Hinweise zur Installation
 -------------------------
 
 * Eine Anleitung und Hilfe zur Installation finden Sie u.a. in der Datei README.md (in diesem Verzeichnis)
+* Desweiteren ist im Wiki des Github Repository's zu Mail Receptionist eine umfangreiche Dokumentation im Aufbau: https://github.com/repodiac/Mail_Receptionist/wiki/Startseite
+
+Hinweise zu Lizenzen
+--------------------
+
+* Mail Receptionist steht unter der Lizenz CC-BY 4.0 (siehe Datei LICENSE)
+* Universal Sentence Encoder Multilingual steht unter der Lizenz Apache 2.0 (siehe Datei LICENSE_Universal-Sentence-Encoder-Multilingual.txt)
+
+

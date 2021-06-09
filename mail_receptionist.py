@@ -259,7 +259,7 @@ def launch_gui() -> None:
                                                                              text_color='Blue',
                                                                              font='Any 8',
                                                                              key='-LINK_MAIL-',
-                                                                             enable_events=True)],
+                                                                             enable_events=True), sg.Text('Hinweis: Nutzung auf eigene Gefahr und ohne jegliche Gewährleistung!', font='Bold 8')],
               [sg.Text('Infos und Updates: ', font='Any 8'), sg.Text('https://github.com/repodiac/Mail_Receptionist',
                                                                      tooltip='github.com aufrufen',
                                                                      text_color='Blue',

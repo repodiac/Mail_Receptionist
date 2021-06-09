@@ -22,18 +22,23 @@ Mail_Receptionist, Copyright 2021 by repodiac, see https://github.com/repodiac f
 
 # Installation/Setup
 
-## Windows Installer (EXE)
+## Ausführbare, All-In-One Installation (Windows)
 
-ToDo
+Über den Punkt _Releases_ in Github (rechte Seitenleiste) existiert ein ZIP-Archiv, welches nur entpackt werden muss unter Windows.
+Alle externen Bibliotheken sowie [Universal Sentence Encoder Multilingual](https://tfhub.dev/google/universal-sentence-encoder-multilingual/3) (Lizenz: Apache 2.0)
+sind bereits integriert, es muss **nichts mehr sonst heruntergeladen werden**.
 
-## Reine Python-Installation und Start
+Es kann dann z.B. eine Desktop-Verknüpfung von `mail_receptionist.exe` angefertigt werden oder per Doppelklick das Programm direkt gestartet werden.
+
+## Reine Python-Installation
 
 ### Abhängigkeiten (Linux/Windows):
 
 ```
 * Python 3.6.x (getestet mit Version 3.6.12 unter Linux und 3.6.8 unter Windows 7)
 * Für den Download ggf. GIT oder Git for Windows
-* pip install -r requirements.txt
+* Universal Sentence Encoder Multilingual (Lizenz: Apache 2.0)
+* Externe Bibliotheken: pip install -r requirements.txt
 ```
 **Wichtiger Hinweis für Windows**
 
