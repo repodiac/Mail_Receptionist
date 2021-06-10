@@ -4,9 +4,11 @@
 
 ![Main Screen](docs/images/mail_receptionist_main_screen.png)
 
-**Mail Receptionist (COVID-19 Ausgabe)** ist ein pythonbasiertes Tool mit graphischer Benutzeroberfläche (GUI), welches automatische eMail-Klassifikationen bzgl. einer COVID-19 Impfanfrage durchführt. eMails werden automatisch bei positiver Klassifikation in spezielle Ordner auf dem eMail-Server verschoben oder mit einem Tag (analog zu "[SPAM]") versehen.
+**Mail Receptionist (COVID-19 Ausgabe)** ist ein pythonbasiertes Analyse-Tool mit graphischer Benutzeroberfläche (GUI), welches Ihre eMail-Anfragen bzgl. einer COVID-19 Impfung vollautomatisch ein- bzw. aussortiert und auf Wunsch zusätzlich automatisch eine Antwort an den Absender sendet. So bleibt Ihnen mehr Zeit für Ihre Patienten oder die Anstellung von Extra-Mitarbeitern zur Bewältigung der aktuellen Mailflut entfällt.
 
-Die Idee dahinter ist, dass (Haus-)Ärzte mittels dieses Tools die Möglichkeit haben, eine hohe Belastung durch eMail-Anfragen wegen einer COVID-19 Impfung zu bewältigen, indem sie diese Mails automatisiert erfassen, filtern und mit einer vorgefertigten Rückantwort bearbeiten lassen können. Dies erspart manuelle Durchsicht und eMail-Beantwortung etc. und entlastet damit Arzt und Praxisteam.
+Alle Analysen und Datenverarbeitungen werden ausschließlich auf Ihrem lokalen Rechner durchgeführt (analog zu einem regulären Mail Client), zusätzlich wurde darauf geachtet, nur verschlüsselte eMail-Kommunikation zuzulassen. Somit sollte dies datenschutzrechtlich unbedenklich sein. 
+
+Die Analyse kategorisiert bzw. klassifiziert  mittels Machine Learning alle eingehenden Mails automatisch in einem festgelegten Interval, um diese bei positiver Klassifikation in spezielle Ordner auf dem eMail-Server zu verschieben oder mit einem Tag (analog zu "[SPAM]") im Betreff zu versehen. Diese Mails können dann bei Bedarf nachträglich auch manuell gelöscht oder archiviert werden (z.B. auch mittels regulärer eMail-Filter wie bei Outlook oder Thunderbird üblich).
 
 ## Lizenz und Zitierungen
 
@@ -27,7 +29,7 @@ Mail_Receptionist, Copyright 2021 by repodiac, see https://github.com/repodiac f
 
 ## Ausführbare, All-In-One Installation (Windows)
 
-Über den Punkt _Releases_ in Github (rechte Seitenleiste) existiert ein ZIP-Archiv, welches nur entpackt werden muss unter Windows.
+Über den Punkt _Releases_ in Github (rechte Seitenleiste) gelangt man zu einem [ZIP-Archiv](https://github.com/repodiac/Mail_Receptionist/releases/tag/0.1.2), welches nur entpackt werden muss unter Windows.
 Alle externen Bibliotheken sowie [Universal Sentence Encoder Multilingual](https://tfhub.dev/google/universal-sentence-encoder-multilingual/3) (Lizenz: Apache 2.0)
 sind bereits integriert, es muss **nichts mehr sonst heruntergeladen werden**.
 
