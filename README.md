@@ -8,7 +8,8 @@
 
 Alle Analysen und Datenverarbeitungen werden ausschließlich auf Ihrem lokalen Rechner durchgeführt (analog zu einem regulären Mail Client), zusätzlich wurde darauf geachtet, nur verschlüsselte eMail-Kommunikation zuzulassen. Somit sollte dies datenschutzrechtlich unbedenklich sein. 
 
-Die Analyse kategorisiert bzw. klassifiziert  mittels Machine Learning alle eingehenden Mails automatisch in einem festgelegten Interval, um diese bei positiver Klassifikation in spezielle Ordner auf dem eMail-Server zu verschieben oder mit einem Tag (analog zu "[SPAM]") im Betreff zu versehen. Diese Mails können dann bei Bedarf nachträglich auch manuell gelöscht oder archiviert werden (z.B. auch mittels regulärer eMail-Filter wie bei Outlook oder Thunderbird üblich).
+Die Analyse kategorisiert bzw. klassifiziert  mittels Machine Learning alle eingehenden Mails automatisch in einem festgelegten Intervall, um diese bei positiver Klassifikation in spezielle Ordner auf dem eMail-Server zu verschieben oder mit einem Tag (analog zu "[SPAM]") im Betreff zu versehen.
+Natürlich können Sie danach bei Bedarf auch manuell oder per Stichwort-Filter (wie bei Outlook oder Thunderbird üblich) diese Mails löschen oder archivieren.
 
 ## Lizenz und Zitierungen
 
