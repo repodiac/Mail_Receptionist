@@ -11,6 +11,20 @@ Alle Analysen und Datenverarbeitungen werden ausschließlich auf Ihrem lokalen R
 Die Analyse kategorisiert bzw. klassifiziert  mittels Machine Learning alle eingehenden Mails automatisch in einem festgelegten Intervall, um diese bei positiver Klassifikation in spezielle Ordner auf dem eMail-Server zu verschieben oder mit einem Tag (analog zu "[SPAM]") im Betreff zu versehen.
 Natürlich können Sie danach bei Bedarf auch manuell oder per Stichwort-Filter (wie bei Outlook oder Thunderbird üblich) diese Mails löschen oder archivieren.
 
+## Vorteile
+
+* Verringerte (im besten Fall: keine) manuelle Sichtung der "Mailflut" anlässlich der aktuellen COVID-19 Impfungen
+* Automatische Antwort an den Absender wählbar
+* Zeit- und Geldersparnis für den Arzt und das Praxisteam
+* "KI" ohne Trainieren, keine Datenweitergabe nötig (Zero oder Few Shot Learning)
+* lässt sich mit jedem eMail-Anbieter und IMAP-Account nutzen - unabhängig vom Mail-Programm (Outlook, Thunderbird, o.ä.) oder Webbrowser
+* läuft automatisch im Hintergrund und prüft/analysiert in festgelegten Zeitintervallen selbstständig
+* Hoher Datenschutz: Alle Analysen und Berechnungen laufen auf dem LOKALEN Rechner (keine Server, Cloud o.ä.), verschlüsselte Verbindungen zum Mail-Server, keine Speicherung des Passwortes ("Security by Design")
+
+## Dokumentation/Hilfe
+
+Dokumentation im [Projekt-Wiki](https://github.com/repodiac/Mail_Receptionist/wiki/Startseite)
+
 ## Lizenz und Zitierungen
 
 This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
