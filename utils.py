@@ -18,7 +18,6 @@ import smtplib
 import logging
 import configparser
 import sys
-from distutils.util import strtobool
 
 import numpy as np
 from imap_tools import MailBox, AND, MailMessage, MailMessageFlags
@@ -73,21 +72,6 @@ except NameError:
     # create global config object
     _LOGGER = logging.getLogger()
     _LOGGER.info('Global logger initialized')
-
-
-def get_logger() -> logging.Logger:
-    """
-    Provide reference to global config object
-    :return:
-    """
-    global _LOGGER
-
-    if not _LOGGER:
-        sys.stderr.write('ERROR: no active logger found - cannot log!')
-        sys.stderr.flush()
-        sys.exit(-1)
-    else:
-        return _LOGGER
 
 
 def read_config(config_file: str =None) -> configparser.ConfigParser:
