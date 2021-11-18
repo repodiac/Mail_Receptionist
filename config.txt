@@ -23,8 +23,8 @@ check mail every .. minutes = 5
 check mail every .. minutes_tooltip = Definiert das Intervall in Minuten, wie oft die eMails analysiert und kategorisiert werden sollen
 default mail folder = INBOX
 default mail folder_tooltip = Ist standardmäßig auf die Inbox/Eingang des Mail-Postfachs eingestellt; von hier werden die eMails ausgelesen für die Analyse. Sollen die Mails in einem anderen Ordner analysiert werden (oder heißt dieser anders als <Inbox>), bite hier ändern.
-send auto-response mail = True
-send auto-response mail_tooltip = Wenn Haken gesetzt ist, wird nach der Kategorisierung als Anfrage zu COVID19-Impfungen eine automatische Antwort-Mail an den Absender versandt
+send auto-response mail = 
+send auto-response mail_tooltip = Wenn Dateiname einer Textdatei gesetzt ist, wird nach der Kategorisierung als Anfrage zu COVID19-Impfungen eine automatische Antwort-Mail mit dem Inhalt der Textdatei an den Absender versandt
 
 [Filter]
 folder for positive examples = Impfanfragen (COVID-19)|POS_Beispiele

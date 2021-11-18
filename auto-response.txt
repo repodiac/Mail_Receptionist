@@ -15,3 +15,5 @@ Formulieren Sie diese stattdessen um oder wenden Sie sich per Telefon direkt an 
 Dies ist eine automatisch generierte Antwort und Analyse von *Mail Receptionist (COVID-19 Ausgabe)*
 (www.github.com/repodiac/Mail_Receptionist)
 
+
+

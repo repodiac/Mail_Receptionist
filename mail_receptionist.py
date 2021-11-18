@@ -55,8 +55,10 @@ def _save_settings(updated_settings: dict) -> None:
     for p in prev_config.sections():
         for k in prev_config[p]:
             # don't update tooltip entries
-            if k not in ('model for textcat', 'ssl protocol') and not k.endswith('_tooltip'):
+            if k not in ('model for textcat', 'ssl protocol', 'send auto-response mail') and not k.endswith('_tooltip'):
                 prev_config[p][k] = str(updated_settings[k]).strip()
+            elif k in ('send auto-response mail'):
+                prev_config[p][k] = 'auto-response.txt' if updated_settings['send auto-response mail'] else ''
     # lastly. save config to disk
     utils.write_config()
     _LOGGER.info('Config updated and written to file')
@@ -78,7 +80,7 @@ def _update_from_config() -> (list, dict, list):
 
     # default settings
     threshold = 55
-    send_auto_response = True
+    send_auto_response = False
     check_mail_interval = 5
     use_builtin_embs = True
 
@@ -87,13 +89,12 @@ def _update_from_config() -> (list, dict, list):
             if k == 'threshold':
                 threshold = int(conf[p][k])
             elif k == 'send auto-response mail':
-                send_auto_response = strtobool(conf[p][k])
+                send_auto_response = True if conf[p][k] else False #strtobool(conf[p][k])
             elif k == 'use built-in model':
                 use_builtin_embs = strtobool(conf[p][k])
             elif k not in ('model for textcat',
                          'threshold',
                          'ssl protocol',
-                         'send auto-response mail',
                          'use built-in model') and not k.endswith('_tooltip'):
                 kv_settings.append((k, conf[p][k]))
             # update all tooltip texts
@@ -134,6 +135,9 @@ def _check_settings(settings: list) -> None:
         elif kv[0] in ('filtered folder', 'filter tag'):
             if not filtered_is_set and kv[1] and isinstance(kv[1], str):
                 filtered_is_set = kv[0]
+        elif kv[0] in ('send auto-response mail'):
+            # it's allowed to have an empty value here, thus separate it from the "else block"
+            pass
         else:
             if not kv[1] or not isinstance(kv[1], str):
                 _LOGGER.error('Setting <' + kv[0] + '> is not a string or is empty.')

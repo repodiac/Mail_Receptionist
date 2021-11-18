@@ -80,6 +80,7 @@ def _check_settings(settings: list) -> None:
             if not filtered_is_set and kv[1] and isinstance(kv[1], str):
                 filtered_is_set = kv[0]
         elif kv[0] in ('send auto-response mail'):
+            # it's allowed to have an empty value here, thus separate it from the "else block"
             pass
         else:
             if not kv[1] or not isinstance(kv[1], str):

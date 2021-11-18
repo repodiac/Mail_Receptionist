@@ -48,6 +48,7 @@ class MailServerError(InvalidSettingsError):
 
 # establish and configure global config object
 _GLOBAL_CONFIG = None
+_CONFIG_FILE = None
 try:
     _LOGGER
 except NameError:
@@ -97,7 +98,8 @@ def read_config(config_file: str =None) -> configparser.ConfigParser:
     otherwise, the "cached" _GLOBAL_CONFIG object is in use, instead
     :return: ConfigParser object representing the current state of the config
     """
-    global _GLOBAL_CONFIG
+    global _GLOBAL_CONFIG, _CONFIG_FILE
+
     if not _GLOBAL_CONFIG:
         if not config_file:
             msg_text = 'Could not read config - no config file name given!?'
@@ -105,9 +107,8 @@ def read_config(config_file: str =None) -> configparser.ConfigParser:
             raise InvalidSettingsError(msg_text)
         _GLOBAL_CONFIG = configparser.ConfigParser()
         _GLOBAL_CONFIG.read_file(open(os.path.join(os.path.dirname(__file__), config_file)))
-        # IMPORTANT: store config file name with config object in order to use it for saving back settings when changes were made!
-        _GLOBAL_CONFIG.add_section('internal')
-        _GLOBAL_CONFIG.set(option='config_file', value=config_file, section='internal')
+        # IMPORTANT: store config file name in order to use it for saving back settings when changes were made!
+        _CONFIG_FILE = config_file
     return _GLOBAL_CONFIG
 
 
@@ -116,14 +117,10 @@ def write_config() -> None:
     Write global config object to disk
     :return: None
     """
-    global _GLOBAL_CONFIG, _LOGGER
+    global _GLOBAL_CONFIG, _LOGGER, _CONFIG_FILE
 
     if _GLOBAL_CONFIG:
-        # IMPORTANT: remove entry (see read_config(..)) BEFORE settings are saved to file (we do not want to store the file name IN the file...)!
-        config_file = _GLOBAL_CONFIG['internal']['config_file']
-        del _GLOBAL_CONFIG['internal']['config_file']
-        del _GLOBAL_CONFIG['internal']
-        with open(os.path.join(os.path.dirname(__file__), config_file), 'w') as cf:
+        with open(os.path.join(os.path.dirname(__file__), _CONFIG_FILE), 'w') as cf:
             _GLOBAL_CONFIG.write(cf)
     else:
         _LOGGER.error('Could not write config - no config loaded!?')
@@ -329,7 +326,7 @@ def read_auto_response_template() -> str:
     """
     conf = read_config()
 
-    ar_path = os.path.join(os.path.dirname(__file__), conf['Mail']['send auto-response mail'])
+    ar_path = os.path.join(os.path.dirname(__file__), conf['Mail']['send auto-response mail'] if conf['Mail']['send auto-response mail'] else 'auto-response.txt')
     with open(ar_path) as fp:
         return fp.read()
 
@@ -342,7 +339,7 @@ def write_auto_response_template(ar_text) -> None:
     """
     conf = read_config()
 
-    ar_path = os.path.join(os.path.dirname(__file__), conf['Mail']['send auto-response mail'])
+    ar_path = os.path.join(os.path.dirname(__file__), conf['Mail']['send auto-response mail'] if conf['Mail']['send auto-response mail'] else 'auto-response.txt')
     with open(ar_path, 'w') as fp:
         fp.write(ar_text)
 
