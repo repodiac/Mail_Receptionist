@@ -1,0 +1,36 @@
+[Machine Learning]
+# Das verwendete Machine Learning-Modell, im Allgemeinen nicht ändern
+model for textcat = universal-sentence-encoder-multilingual_3
+# Der Schwellwertw (0-100), der entscheidet, ob eine eMail als Anfrage zu Rezepten kategorisiert wird (Wert größer) oder nicht (Wert kleiner)
+threshold = 55
+# Zum Start ohne eigene Beispiele bzw. als zusätzliche Unterstützung für die KI können Sie eine kleine Auswahl an (fiktiven) positiven  und negativen Beispielen nutzen
+use built-in model = False
+
+[Mail]
+# Der Mail-Server, bei dem Sie Ihre Mail abholen. Es ist erforderlich, dass dieser IMAP unterstützt.
+imap server = imap.web.de
+# Der Port des IMAP Mail-Servers, der TLS unterstützt.
+imap port = 993
+# Der Mail-Server, der zum Versenden der Auto-Response auf Anfragen verwendet wird. Er sollte TLS unterstützen.
+smtp server = smtp.web.de
+# Der Port des SMTP Mail-Servers, der TLS unterstützt.
+smtp port = 465
+# Ihre eMail-Adresse (in den meisten Fällen gleich dem Login/Nutzer)
+login mail address = devmails@web.de
+# Die intern codierte Version für die zu verwendende TLS-Version, im Allgemeinen nicht ändern
+ssl protocol = 5
+# Ist standardmäßig auf die Inbox/Eingang des Mail-Postfachs eingestellt; von hier werden die eMails ausgelesen für die Analyse. Sollen die Mails in einem anderen Ordner analysiert werden (oder heißt dieser anders als <Inbox>), bite hier ändern.
+default mail folder = INBOX
+# Der Inhalt des angegebenen Textdateinames (kann Pfad enthalten) wird nach der Kategorisierung als Anfrage zu Rezepten als eine automatische Antwort-Mail an den Absender versandt; leer lassen für KEINE Auto-Response Mail senden
+send auto-response mail = 
+
+[Filter]
+# Definiert den Pfad, in dem Beispiel-Mails für die Kategorisierung als Anfrage zu Rezepten zu finden sind (positiv)
+folder for positive examples = Rezeptanfragen|POS_Beispiele
+# Definiert den Pfad, in dem Beispiel-Mails zu finden sind (negativ), die KEINE Anfrage zu Rezepten sind
+folder for negative examples = Rezeptanfragen|NEG_Beispiele
+# Definiert den Pfad, in den die Mails verschoben werden, die als Anfrage zu Rezepten kategorisiert wurden
+filtered folder = Rezeptanfragen
+# der Präfix oder Tag, der allen Mails im Betreff vorangestellt wird\n(analog zu [SPAM] bei Spamfiltern), die als Anfrage zu Rezepten kategorisiert wurden
+filter tag = Anfrage Rezept
+

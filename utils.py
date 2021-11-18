@@ -89,15 +89,25 @@ def get_logger() -> logging.Logger:
         return _LOGGER
 
 
-def read_config() -> configparser.ConfigParser:
+def read_config(config_file: str =None) -> configparser.ConfigParser:
     """
     Get global config object; is either read from disk or memory buffer
+    param config_file: file name (can include full path) to the current config,
+    defaults to None, since it is ONLY used in the very first call to read_config;
+    otherwise, the "cached" _GLOBAL_CONFIG object is in use, instead
     :return: ConfigParser object representing the current state of the config
     """
     global _GLOBAL_CONFIG
     if not _GLOBAL_CONFIG:
+        if not config_file:
+            msg_text = 'Could not read config - no config file name given!?'
+            _LOGGER.error(msg_text)
+            raise InvalidSettingsError(msg_text)
         _GLOBAL_CONFIG = configparser.ConfigParser()
-        _GLOBAL_CONFIG.read_file(open(os.path.join(os.path.dirname(__file__), 'config.txt')))
+        _GLOBAL_CONFIG.read_file(open(os.path.join(os.path.dirname(__file__), config_file)))
+        # IMPORTANT: store config file name with config object in order to use it for saving back settings when changes were made!
+        _GLOBAL_CONFIG.add_section('internal')
+        _GLOBAL_CONFIG.set(option='config_file', value=config_file, section='internal')
     return _GLOBAL_CONFIG
 
 
@@ -109,7 +119,11 @@ def write_config() -> None:
     global _GLOBAL_CONFIG, _LOGGER
 
     if _GLOBAL_CONFIG:
-        with open(os.path.join(os.path.dirname(__file__), 'config.txt'), 'w') as cf:
+        # IMPORTANT: remove entry (see read_config(..)) BEFORE settings are saved to file (we do not want to store the file name IN the file...)!
+        config_file = _GLOBAL_CONFIG['internal']['config_file']
+        del _GLOBAL_CONFIG['internal']['config_file']
+        del _GLOBAL_CONFIG['internal']
+        with open(os.path.join(os.path.dirname(__file__), config_file), 'w') as cf:
             _GLOBAL_CONFIG.write(cf)
     else:
         _LOGGER.error('Could not write config - no config loaded!?')
@@ -128,7 +142,7 @@ def filter_mails(filtered_mails: list, account: MailBox, passwd: bytearray) -> N
     filtered_folder = conf['Filter']['filtered folder']
     filter_tag = conf['Filter']['filter tag']
     inbox_folder = conf['Mail']['default mail folder']
-    send_autoresponse = bool(strtobool(conf['Mail']['send auto-response mail']))
+    autoresponse_filename = conf['Mail']['send auto-response mail']
 
     # add filter tag prefix to mail subject is selected in settings
     if filter_tag:
@@ -142,9 +156,9 @@ def filter_mails(filtered_mails: list, account: MailBox, passwd: bytearray) -> N
                            folder=filtered_folder if filtered_folder else inbox_folder,
                            dt=msg.date,
                            # set filtered mail to state SEEN (new mails are always UNSEEN)
-                           flag_set=[MailMessageFlags.SEEN, MailMessageFlags.ANSWERED] if send_autoresponse else [MailMessageFlags.SEEN])
-            # if auto-response mails are selected in settings, send auto-response for the current mail
-            if send_autoresponse:
+                           flag_set=[MailMessageFlags.SEEN, MailMessageFlags.ANSWERED] if autoresponse_filename else [MailMessageFlags.SEEN])
+            # if auto-response mails are selected in settings or given in config file, send auto-response file contents for the current mail
+            if autoresponse_filename:
                 _send_auto_response_mail(msg.from_, passwd, msg.subject)
 
         account.folder.set(inbox_folder)
@@ -157,7 +171,7 @@ def filter_mails(filtered_mails: list, account: MailBox, passwd: bytearray) -> N
     # no filter tag selected, thus only move mails to specified folder "filtered_folder"
     else:
         account.folder.set(inbox_folder)
-        if send_autoresponse:
+        if autoresponse_filename:
             # send also auto-response mail if selected
             for msg in filtered_mails:
                 _send_auto_response_mail(msg.from_, passwd, msg.subject)
@@ -313,7 +327,9 @@ def read_auto_response_template() -> str:
     Load auto-response template from disk
     :return: string of file contents
     """
-    ar_path = os.path.join(os.path.dirname(__file__), 'auto-response.txt')
+    conf = read_config()
+
+    ar_path = os.path.join(os.path.dirname(__file__), conf['Mail']['send auto-response mail'])
     with open(ar_path) as fp:
         return fp.read()
 
@@ -324,7 +340,9 @@ def write_auto_response_template(ar_text) -> None:
     :param ar_text: text to be saved to file
     :return: None
     """
-    ar_path = os.path.join(os.path.dirname(__file__), 'auto-response.txt')
+    conf = read_config()
+
+    ar_path = os.path.join(os.path.dirname(__file__), conf['Mail']['send auto-response mail'])
     with open(ar_path, 'w') as fp:
         fp.write(ar_text)
 
@@ -338,6 +356,7 @@ def _send_auto_response_mail(addressee, passwd: bytearray, addressee_subject) ->
     :return: None
     """
     conf = read_config()
+
     send_server = conf['Mail']['smtp server']
     send_port = conf['Mail']['smtp port']
     login = conf['Mail']['login mail address']
@@ -347,7 +366,8 @@ def _send_auto_response_mail(addressee, passwd: bytearray, addressee_subject) ->
     else:
         ssl_protocol = int(ssl_protocol)
 
-    ar_path = os.path.join(os.path.dirname(__file__), 'auto-response.txt')
+    autoresponse_filename = conf['Mail']['send auto-response mail']
+    ar_path = os.path.join(os.path.dirname(__file__), autoresponse_filename)
     with open(ar_path) as fp:
         msg = email.message.EmailMessage()
         msg.set_content(fp.read())

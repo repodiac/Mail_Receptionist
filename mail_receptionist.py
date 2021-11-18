@@ -504,7 +504,7 @@ def main() -> None:
     and launch the GUI, afterwards
     :return: None
     """
-    ml.init_model()
+    ml.init_model(config_file='config.txt')
     launch_gui()
 
 

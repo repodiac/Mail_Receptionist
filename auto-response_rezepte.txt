@@ -1,0 +1,13 @@
+Guten Tag,
+
+danke für Ihre Anfrage zu einer Rezeptverlängerung.
+
+Wir werden uns umgehend mit Ihnen in Verbindung setzen, sobald es die Zeit zulässt.
+
+Viele Grüße und bleiben Sie gesund!
+Ihr Praxis-Team <<<<Praxis-Name hier>>>>
+
+---
+Dies ist eine automatisch generierte Antwort und Analyse von *Mail Receptionist*
+(www.github.com/repodiac/Mail_Receptionist)
+

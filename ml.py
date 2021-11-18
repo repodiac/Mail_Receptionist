@@ -26,15 +26,19 @@ _LOGGER = logging.getLogger(__name__)
 _MODEL_NAME = None
 _USE_MODEL = None
 
-def init_model():
+def init_model(config_file: str ='config.txt') -> None:
     """
     load model for Universal Sentence Encoder from disk
     (get files from https://tfhub.dev/google/universal-sentence-encoder-multilingual/3)
+    :param config_file: file name (can include full path) to the current config,
+    defaults to 'config.txt' in the application folder
     :return: None
     """
     global _MODEL_NAME, _USE_MODEL
 
-    conf = utils.read_config()
+    # the config file name is provided ONLY here, since in all later invocations of read_config,
+    # the config is read from the "cached" config object!
+    conf = utils.read_config(config_file)
     _MODEL_NAME = conf['Machine Learning']['model for textcat']
     _USE_MODEL = keras.models.load_model(path.join(path.dirname(__file__), _MODEL_NAME))
     _LOGGER.info('Model ' + _MODEL_NAME + ' was loaded into memory')
@@ -78,7 +82,7 @@ def categorize(account) -> list:
 
     if not examples and not use_builtin_embs:
         _LOGGER.error('ERROR: NO POSITIVE EXAMPLES found and built-in model is deselected in settings - cannot proceed, NO DATA!')
-        raise InvalidSettingsError('Fehlende Trainingsdaten! Es wurden keine positiven Beispiel-Mails gefunden in Ordner ' + examples_folder + ', außerdem wurde das eingebaute Modell (use built-in model) in den Einstellungen abgewählt, so dass KEINE DATEN vorliegen. Bitte korrigieren.')
+        raise InvalidSettingsError('Fehlende Trainingsdaten! Es wurden keine positiven Beispiel-Mails gefunden in Ordner <' + examples_folder + '>, außerdem wurde das eingebaute Modell (use built-in model) in den Einstellungen abgewählt, so dass KEINE DATEN vorliegen. Bitte korrigieren.')
 
     # extract text from examples and unseen mails
     ex = _extract_text(examples, cutoff_chars=None)
@@ -142,7 +146,7 @@ def categorize(account) -> list:
                 # and we continue with the next mail in the inbox folder
                 break
 
-    _LOGGER.info('Mails categorized as inquiry for COVID19 vaccination - ' + str(len(filtered_mails)) + ' in total')
+    _LOGGER.info('Mails categorized - ' + str(len(filtered_mails)) + ' in total')
 
     # try to free as much memory as possible after the analysis took place
     del embs_ex, embs_mails, embs_negex, ex_builtin_embs, negex_builtin_embs
