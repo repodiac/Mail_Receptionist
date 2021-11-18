@@ -8,15 +8,15 @@ use built-in model = False
 
 [Mail]
 # Der Mail-Server, bei dem Sie Ihre Mail abholen. Es ist erforderlich, dass dieser IMAP unterstützt.
-imap server = imap.web.de
+imap server = 
 # Der Port des IMAP Mail-Servers, der TLS unterstützt.
 imap port = 993
 # Der Mail-Server, der zum Versenden der Auto-Response auf Anfragen verwendet wird. Er sollte TLS unterstützen.
-smtp server = smtp.web.de
+smtp server = 
 # Der Port des SMTP Mail-Servers, der TLS unterstützt.
 smtp port = 465
 # Ihre eMail-Adresse (in den meisten Fällen gleich dem Login/Nutzer)
-login mail address = devmails@web.de
+login mail address = 
 # Die intern codierte Version für die zu verwendende TLS-Version, im Allgemeinen nicht ändern
 ssl protocol = 5
 # Ist standardmäßig auf die Inbox/Eingang des Mail-Postfachs eingestellt; von hier werden die eMails ausgelesen für die Analyse. Sollen die Mails in einem anderen Ordner analysiert werden (oder heißt dieser anders als <Inbox>), bite hier ändern.
